@@ -53,8 +53,13 @@ const cardArray = [
     }
 ]
 
+cardArray.sort(() => 0.5 - Math.random())
+
 const grid = document.getElementsByClassName('grid'); // or could have used document.querySelector('.grid')
+const resultDisplay = document.querySelector('#result')
 const cardsChosen = [];
+const cardsChosenId = [];
+const cardsWon = [];
 
 // create the board
 function createBoard() {
@@ -69,12 +74,37 @@ function createBoard() {
 };
 
 // check for matches
+function checkForMatch() {
+    var cards = document.querySelectorAll('img');
+    const optionOneId = cardsChosenId[0]
+    const optionTwoId = cardsChosenId[1]
+    if (cardsChosen[0] === cardsChosen[1]) {
+        alert("You've found a match!  Your stomach is that little bit fuller...")
+        cards[optionOneId].setAttribute('src', '/assets/images/wizard.png')
+        cards[optionTwoId].setAttribute('src', '/assets/images/wizard.png')
+        cardsWon.push(cardsChosen);
+    } else {
+        cards[optionOneId].setAttribute('src', '/assets/images/skeleton.png')
+        cards[optionTwoId].setAttribute('src', '/assets/images/skeleton.png')
+        alert("Thwarted once again!  Your stomach rumbles at your failure...")
+    }
+    cardsChosen = []
+    cardsChosenId = []
+    resultDisplay.textContent = cardsWon.length
+    if (cardsWon.length === cardArray.length/2) {
+        resultDisplay.textContent = 'Congratulations, you are stuffed!  You vanquished evil, and ate heartily.'
+    }
+}
 
 // flip your card
 function flipCard() {
     var cardId = this.getAttribute('data-id');
     cardsChosen.push(cardArray[cardId].name);
     cardsChosenId.push(cardId);
+    this.setAttribute('src', cardArray[cardId].img)
+    if (cardsChosen.length === 2) {
+        setTimeout(checkForMatch, 1000)
+    }
 }
 
 createBoard();
