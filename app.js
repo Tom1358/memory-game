@@ -1,11 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-// card options
+// card options - 6x images, all 100px x 100px in size, with array below holding 2x each image
+
 
 const cardArray = [
     {
         name: 'apple',
         img: '/assets/images/apple.jpg'
+    },
+    {
+        name: 'apple',
+        img: '/assets/images/apple.jpg'
+    },
+    {
+        name: 'bananas',
+        img: '/assets/images/bananas.jpg'
     },
     {
         name: 'bananas',
@@ -16,8 +25,12 @@ const cardArray = [
         img: '/assets/images/cherries.jpg'
     },
     {
-        name: 'dragon_fruit',
-        img: '/assets/images/dragon_fruit.jpg'
+        name: 'cherries',
+        img: '/assets/images/cherries.jpg'
+    },
+    {
+        name: 'grapes',
+        img: '/assets/images/grapes.jpg'
     },
     {
         name: 'grapes',
@@ -28,82 +41,70 @@ const cardArray = [
         img: '/assets/images/lemon.jpg'
     },
     {
-        name: 'orange',
-        img: '/assets/images/orange.jpg'
-    },
-    {
-        name: 'pineapple',
-        img: '/assets/images/pineapple.jpg'
-    },
-    {
-        name: 'star_fruit',
-        img: '/assets/images/star_fruit.jpg'
+        name: 'lemon',
+        img: '/assets/images/lemon.jpg'
     },
     {
         name: 'strawberry',
         img: '/assets/images/strawberry.jpg'
     },
     {
-        name: 'tomato',
-        img: '/assets/images/tomato.jpg'
+        name: 'strawberry',
+        img: '/assets/images/strawberry.jpg'
     },
-    {
-        name: 'watermelon',
-        img: '/assets/images/watermelon.jpg'
-    }
 ]
 
-cardArray.sort(() => 0.5 - Math.random())
+cardArray.sort(() => 0.5 - Math.random()) //allows to refresh game with new card positions
 
 const grid = document.getElementsByClassName('grid'); // or could have used document.querySelector('.grid')
 const resultDisplay = document.querySelector('#result')
-const cardsChosen = [];
-const cardsChosenId = [];
-const cardsWon = [];
+let cardsChosen = [];
+let cardsChosenId = [];
+let cardsWon = []; // had to change from const to let, as lines 91 and 92 weren't resetting the array with error message 'assignment to constant variable, checkForMatch line 91 
 
 // create the board
 function createBoard() {
-    for (let i=0; i < cardArray.length; i++) {
-        var card = document.createElement('img');
-        card.setAttribute('src', '/assets/images/skeleton.png');
-        card.setAttribute('data-id', i);
-        card.addEventListener('click', flipCard)
-        grid[0].appendChild(card);
-       
+    for (let i=0; i < cardArray.length; i++) { // loops over card array
+        let card = document.createElement('img'); // for each card, image element created, called 'card'
+        card.setAttribute('src', '/assets/images/skeleton.png'); // sets attribute, linking it to the skeleton png image
+        card.setAttribute('data-id', i); // also sets attribute of data to loop for each card ('i' - iterable)
+        card.addEventListener('click', flipCard) // listens if card has been flipped, then invokes function on linev102
+        grid[0].appendChild(card); // puts into grid (n.b. need index position[0] because used 'getElementsByClassName' on line 59, which returns an array even if in this case it's an array of one index))
     }
 };
 
 // check for matches
-function checkForMatch() {
-    var cards = document.querySelectorAll('img');
-    const optionOneId = cardsChosenId[0]
-    const optionTwoId = cardsChosenId[1]
+function checkForMatch() { // currently we have 2x values in our cardsChosen array, and 2x values in our cardsChosenId array, at this point. 
+    let cards = document.querySelectorAll('img'); //picks up all images created in createBoard function, line 68
+    let optionOneId = cardsChosenId[0];
+    let optionTwoId = cardsChosenId[1];
     if (cardsChosen[0] === cardsChosen[1]) {
-        alert("You've found a match!  Your stomach is that little bit fuller...")
-        cards[optionOneId].setAttribute('src', '/assets/images/wizard.png')
-        cards[optionTwoId].setAttribute('src', '/assets/images/wizard.png')
-        cardsWon.push(cardsChosen);
+        alert("You've found a match!  Your stomach is that little bit fuller...");
+        cards[optionOneId].setAttribute('src', '/assets/images/wizard.png');
+        cards[optionTwoId].setAttribute('src', '/assets/images/wizard.png');
+        cardsWon.push(cardsChosen); // pushes selected cards into cardsWon array (line 63) so that they are effectively out of the game
     } else {
-        cards[optionOneId].setAttribute('src', '/assets/images/skeleton.png')
-        cards[optionTwoId].setAttribute('src', '/assets/images/skeleton.png')
-        alert("Thwarted once again!  Your stomach rumbles at your failure...")
+        cards[optionOneId].setAttribute('src', '/assets/images/skeleton.png'); // resets to skeleton if incorrect
+        cards[optionTwoId].setAttribute('src', '/assets/images/skeleton.png');
+        alert("Thwarted once again!  Your stomach rumbles at your failure...");
     }
-    cardsChosen = []
-    cardsChosenId = []
-    resultDisplay.textContent = cardsWon.length
-    if (cardsWon.length === cardArray.length/2) {
-        resultDisplay.textContent = 'Congratulations, you are stuffed!  You vanquished evil, and ate heartily.'
+    cardsChosen = []; // resets array to clear
+    cardsChosenId = [];
+    resultDisplay.textContent = cardsWon.length; // shows one point for every matched pair
+    if (cardsWon.length === cardArray.length/2) { // we know that we have collected every pair of cards in the cards array
+        resultDisplay.textContent = '';
+        document.getElementById('score').textContent = 'Congratulations, you are stuffed!  You vanquished evil, and ate heartily.';
     }
 }
 
 // flip your card
 function flipCard() {
-    var cardId = this.getAttribute('data-id');
-    cardsChosen.push(cardArray[cardId].name);
-    cardsChosenId.push(cardId);
-    this.setAttribute('src', cardArray[cardId].img)
+    let cardId = this.getAttribute('data-id'); // gets data-id attribute created in createBoard function, line 70, and applies it to whatever card turned over
+    cardsChosen.push(cardArray[cardId].name); // push from cardArray based on that card ID, e.g. if card array is [4], it will match the 5th card in that array. Once located, will get its name, and push TO cardsChosen array, line 61
+    cardsChosenId.push(cardId); // Same done in line above for cardId, just need the ID
+    this.setAttribute('src', cardArray[cardId].img); // because flipCard is already in a function, we already have a card picked. this.setAttribute allows an image to be added to the square based on the image it holds...
     if (cardsChosen.length === 2) {
-        setTimeout(checkForMatch, 1000)
+        setTimeout(checkForMatch, 250); // ...will invoke checkForMatch function when 2 cards are selected
     }
 }
 
