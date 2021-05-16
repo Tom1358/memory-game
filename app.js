@@ -14,43 +14,43 @@ const cardArray = [
     },
     {
         name: 'bananas',
-        img: 'https://github.com/Tom1358/memory-game/blob/master/assets/images/bananas.jpg'
+        img: 'https://github.com/Tom1358/memory-game/blob/master/assets/images/bananas.jpg?raw=true'
     },
     {
         name: 'bananas',
-        img: 'https://github.com/Tom1358/memory-game/blob/master/assets/images/bananas.jpg'
+        img: 'https://github.com/Tom1358/memory-game/blob/master/assets/images/bananas.jpg?raw=true'
     },
     {
         name: 'cherries',
-        img: 'https://github.com/Tom1358/memory-game/blob/master/assets/images/cherries.jpg'
+        img: 'https://github.com/Tom1358/memory-game/blob/master/assets/images/cherries.jpg?raw=true'
     },
     {
         name: 'cherries',
-        img: 'https://github.com/Tom1358/memory-game/blob/master/assets/images/cherries.jpg'
+        img: 'https://github.com/Tom1358/memory-game/blob/master/assets/images/cherries.jpg?raw=true'
     },
     {
         name: 'grapes',
-        img: 'https://github.com/Tom1358/memory-game/blob/master/assets/images/grapes.jpg'
+        img: 'https://github.com/Tom1358/memory-game/blob/master/assets/images/grapes.jpg?raw=true'
     },
     {
         name: 'grapes',
-        img: 'https://github.com/Tom1358/memory-game/blob/master/assets/images/grapes.jpg'
+        img: 'https://github.com/Tom1358/memory-game/blob/master/assets/images/grapes.jpg?raw=true'
     },
     {
         name: 'lemon',
-        img: 'https://github.com/Tom1358/memory-game/blob/master/assets/images/lemon.jpg'
+        img: 'https://github.com/Tom1358/memory-game/blob/master/assets/images/lemon.jpg?raw=true'
     },
     {
         name: 'lemon',
-        img: 'https://github.com/Tom1358/memory-game/blob/master/assets/images/lemon.jpg'
+        img: 'https://github.com/Tom1358/memory-game/blob/master/assets/images/lemon.jpg?raw=true'
     },
     {
         name: 'strawberry',
-        img: 'https://github.com/Tom1358/memory-game/blob/master/assets/images/strawberry.jpg'
+        img: 'https://github.com/Tom1358/memory-game/blob/master/assets/images/strawberry.jpg?raw=true'
     },
     {
         name: 'strawberry',
-        img: 'https://github.com/Tom1358/memory-game/blob/master/assets/images/strawberry.jpg'
+        img: 'https://github.com/Tom1358/memory-game/blob/master/assets/images/strawberry.jpg?raw=true'
     },
 ]
 
