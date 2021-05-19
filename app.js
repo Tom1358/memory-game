@@ -66,7 +66,7 @@ let cardsWon = []; // had to change from const to let, as lines 91 and 92 weren'
 function createBoard() {
     for (let i=0; i < cardArray.length; i++) { // loops over card array
         let card = document.createElement('img'); // for each card, image element created, called 'card'
-        card.setAttribute('src', '/assets/images/skeleton.png'); // sets attribute, linking it to the skeleton png image
+        card.setAttribute('src', 'https://github.com/Tom1358/memory-game/blob/master/assets/images/skeleton.png?raw=true'); // sets attribute, linking it to the skeleton png image
         card.setAttribute('data-id', i); // also sets attribute of data to loop for each card ('i' - iterable)
         card.addEventListener('click', flipCard) // listens if card has been flipped, then invokes function on linev102
         grid[0].appendChild(card); // puts into grid (n.b. need index position[0] because used 'getElementsByClassName' on line 59, which returns an array even if in this case it's an array of one index))
@@ -80,12 +80,12 @@ function checkForMatch() { // currently we have 2x values in our cardsChosen arr
     let optionTwoId = cardsChosenId[1];
     if (cardsChosen[0] === cardsChosen[1]) {
         alert("You've found a match!  Your stomach is that little bit fuller...");
-        cards[optionOneId].setAttribute('src', '/assets/images/wizard.png');
-        cards[optionTwoId].setAttribute('src', '/assets/images/wizard.png');
+        cards[optionOneId].setAttribute('src', 'https://github.com/Tom1358/memory-game/blob/master/assets/images/wizard.png?raw=true');
+        cards[optionTwoId].setAttribute('src', 'https://github.com/Tom1358/memory-game/blob/master/assets/images/wizard.png?raw=true');
         cardsWon.push(cardsChosen); // pushes selected cards into cardsWon array (line 63) so that they are effectively out of the game
     } else {
-        cards[optionOneId].setAttribute('src', '/assets/images/skeleton.png'); // resets to skeleton if incorrect
-        cards[optionTwoId].setAttribute('src', '/assets/images/skeleton.png');
+        cards[optionOneId].setAttribute('src', 'https://github.com/Tom1358/memory-game/blob/master/assets/images/skeleton.png?raw=true'); // resets to skeleton if incorrect
+        cards[optionTwoId].setAttribute('src', 'https://github.com/Tom1358/memory-game/blob/master/assets/images/skeleton.png?raw=true');
         alert("Thwarted once again!  Your stomach rumbles at your failure...");
     }
     cardsChosen = []; // resets array to clear
